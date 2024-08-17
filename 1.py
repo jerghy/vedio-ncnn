@@ -7,14 +7,19 @@ sys.stdout.reconfigure(encoding='utf-8')
 executable_path = 'realesrgan/realesrgan-ncnn-vulkan.exe'
 
 # 检查文件是否存在
-if os.path.exists(executable_path):
-    print(f"文件存在：{executable_path}")
-else:
-    print(f"文件不存在：{executable_path}")
+
+
+def isfile(path):
+    if os.path.exists(path):
+        print(f"文件存在：{path}")
+    else:
+        print(f"文件不存在：{path}")
+isfile(executable_path)
+
 
 # 定义输入文件列表和输出文件路径
 # input_files = [
-#     'folder/frame_0001.png',
+#     'folder/frame_001.png',
 #     'folder/frame_0002.png',
 #     'folder/frame_0003.png'
 # ]
@@ -24,7 +29,7 @@ else:
 #     'output/0003.png'
 # ]
 
-num_files = 30
+num_files = 3
 
 # 生成 input_files 和 output_files 列表
 input_files = [f'folder/frame_{i:04d}.png' for i in range(1, num_files + 1)]
@@ -35,6 +40,8 @@ os.makedirs(os.path.dirname(output_files[0]), exist_ok=True)
 
 # 依次处理每张图片
 for input_path, output_path in zip(input_files, output_files):
+    isfile(input_path)
+    # isfile(output_path)
     # 定义命令行参数
     command = [
         executable_path,
