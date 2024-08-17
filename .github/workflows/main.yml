@@ -29,6 +29,10 @@ jobs:
       run: |
         icacls realesrgan/realesrgan-ncnn-vulkan.exe /grant Everyone:F
 
+    - name: Run Real-ESRGAN
+      run: |
+        realesrgan/realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png
+
  
 
     - name: Run image processing script
