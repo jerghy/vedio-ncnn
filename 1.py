@@ -5,16 +5,22 @@ import subprocess
 executable_path = 'realesrgan/realesrgan-ncnn-vulkan.exe'
 
 # 定义输入文件列表和输出文件路径
-input_files = [
-    'folder/frame_0001.png',
-    'folder/frame_0002.png',
-    'folder/frame_0003.png'
-]
-output_files = [
-    'output/0001.png',
-    'output/0002.png',
-    'output/0003.png'
-]
+# input_files = [
+#     'folder/frame_0001.png',
+#     'folder/frame_0002.png',
+#     'folder/frame_0003.png'
+# ]
+# output_files = [
+#     'output/0001.png',
+#     'output/0002.png',
+#     'output/0003.png'
+# ]
+
+num_files = 30
+
+# 生成 input_files 和 output_files 列表
+input_files = [f'folder/frame_{i:04d}.png' for i in range(1, num_files + 1)]
+output_files = [f'output/{i:04d}.png' for i in range(1, num_files + 1)]
 
 # 确保输出文件夹存在
 os.makedirs(os.path.dirname(output_files[0]), exist_ok=True)
