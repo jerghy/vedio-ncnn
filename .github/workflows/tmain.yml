@@ -10,30 +10,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Download Real-ESRGAN executable
-      run: |
-        curl -L -o realesrgan-ncnn-vulkan.zip https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-windows.zip
-        tar -xf realesrgan-ncnn-vulkan.zip -C realesrgan --strip-components=1
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
 
-    - name: Ensure executable permissions
+    - name: Install dependencies
       run: |
-        icacls realesrgan/realesrgan-ncnn-vulkan.exe /grant Everyone:F
+        python -m pip install --upgrade pip
+        pip install torch torchvision
+        pip install -r requirements.txt
 
     - name: Download test image
       run: |
         curl -L -o input.png https://example.com/path/to/your/input.png
 
-    - name: Verify input file
-      run: |
-        echo "Verifying input file:"
-        file input.png
-        dir input.png
-
     - name: Run Real-ESRGAN
       run: |
-        .\realesrgan\realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png > output.log 2> error.log; `
-        if ($?) { exit 0 } else { exit 1 }
-      shell: pwsh
+        python inference_realesrgan.py -n RealESRGAN_x4plus -i input.png -o output --outscale 3.5 --face_enhance > output.log 2> error.log
       continue-on-error: true
 
     - name: Print logs
@@ -51,3 +45,9 @@ jobs:
         path: |
           output.log
           error.log
+
+    - name: Upload output image
+      uses: actions/upload-artifact@v2
+      with:
+        name: output-image
+        path: output
