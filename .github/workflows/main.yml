@@ -25,10 +25,9 @@ jobs:
         # pip install some_dependency
 
         
-    - name: Run text processing
+    - name: Ensure executable permissions
       run: |
-        cd realesrgan
-        # realesrgan-ncnn-vulkan.exe
+        icacls realesrgan/realesrgan-ncnn-vulkan.exe /grant Everyone:F
 
  
 
