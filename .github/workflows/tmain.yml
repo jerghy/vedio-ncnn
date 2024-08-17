@@ -20,22 +20,23 @@ jobs:
 
     - name: Run Real-ESRGAN
       run: |
-        .\realesrgan\realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png > output.log 2> error.log
+        .\realesrgan\realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png > output.log 2> error.log; `
+        if ($?) { exit 0 } else { exit 1 }
+      shell: pwsh
       continue-on-error: true
 
-    - name: Print error log if any
-      if: failure()
+    - name: Print logs
       run: |
-        echo "Real-ESRGAN failed to run. Printing error log:"
+        echo "Printing error log:"
         type error.log
         echo "Printing output log:"
         type output.log
+      shell: pwsh
+
     - name: Upload logs
-      if: failure()
       uses: actions/upload-artifact@v2
       with:
         name: logs
         path: |
           output.log
           error.log
-
