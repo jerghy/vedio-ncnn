@@ -12,7 +12,7 @@ jobs:
 
     - name: Download Real-ESRGAN executable
       run: |
-        curl -L -o realesrgan-ncnn-vulkan.zip https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.0/realesrgan-ncnn-vulkan-20211212-windows.zip
+        curl -L -o realesrgan-ncnn-vulkan.zip https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-windows.zip
         tar -xf realesrgan-ncnn-vulkan.zip -C realesrgan --strip-components=1
 
     - name: Ensure executable permissions
