@@ -1,5 +1,7 @@
 import os
 import subprocess
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 # 定义可执行文件的路径
 executable_path = 'realesrgan/realesrgan-ncnn-vulkan.exe'
