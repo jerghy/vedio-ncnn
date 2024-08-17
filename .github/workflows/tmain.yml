@@ -30,3 +30,12 @@ jobs:
         type error.log
         echo "Printing output log:"
         type output.log
+    - name: Upload logs
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: logs
+        path: |
+          output.log
+          error.log
+
