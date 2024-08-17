@@ -1,0 +1,30 @@
+name: Run Real-ESRGAN
+
+on: [push, pull_request]
+
+jobs:
+  run-realesrgan:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Ensure executable permissions
+      run: |
+        icacls realesrgan/realesrgan-ncnn-vulkan.exe /grant Everyone:F
+
+    - name: Download test image
+      run: |
+        curl -L -o input.png https://example.com/path/to/your/input.png
+
+    - name: Run Real-ESRGAN
+      run: |
+        realesrgan/realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png
+      continue-on-error: true
+
+    - name: Print error log if any
+      if: failure()
+      run: |
+        echo "Real-ESRGAN failed to run. Printing error log:"
+        type output_image.png
