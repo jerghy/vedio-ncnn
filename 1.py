@@ -4,6 +4,12 @@ import subprocess
 # 定义可执行文件的路径
 executable_path = 'realesrgan/realesrgan-ncnn-vulkan.exe'
 
+# 检查文件是否存在
+if os.path.exists(executable_path):
+    print(f"文件存在：{executable_path}")
+else:
+    print(f"文件不存在：{executable_path}")
+
 # 定义输入文件列表和输出文件路径
 # input_files = [
 #     'folder/frame_0001.png',
