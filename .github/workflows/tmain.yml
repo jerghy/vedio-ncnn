@@ -20,11 +20,13 @@ jobs:
 
     - name: Run Real-ESRGAN
       run: |
-        realesrgan/realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png
+        .\realesrgan\realesrgan-ncnn-vulkan.exe -i input.png -o output_image.png > output.log 2> error.log
       continue-on-error: true
 
     - name: Print error log if any
       if: failure()
       run: |
         echo "Real-ESRGAN failed to run. Printing error log:"
-        type output_image.png
+        type error.log
+        echo "Printing output log:"
+        type output.log
