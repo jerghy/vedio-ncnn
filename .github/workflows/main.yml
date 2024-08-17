@@ -24,6 +24,12 @@ jobs:
         # 如果有其他依赖，可以在这里安装
         # pip install some_dependency
 
+        
+    - name: Run text processing
+      run: |
+        cd realesrgan
+        realesrgan-ncnn-vulkan.exe
+
  
 
     - name: Run image processing script
