@@ -28,7 +28,7 @@ jobs:
     - name: Run text processing
       run: |
         cd realesrgan
-        realesrgan-ncnn-vulkan.exe
+        # realesrgan-ncnn-vulkan.exe
 
  
 
